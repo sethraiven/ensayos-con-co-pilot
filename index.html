@@ -19,6 +19,7 @@
             color: white;
             padding: 20px;
             text-align: center;
+            position: relative; /* Añadir posición relativa para el contenedor del carrito */
         }
         .container {
             padding: 20px;
@@ -64,6 +65,11 @@
             padding: 15px;
             margin-top: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: absolute; /* Posicionar el carrito */
+            top: 60px; /* Ajustar la posición superior */
+            right: 20px; /* Ajustar la posición derecha */
+            width: 300px; /* Ajustar el ancho del carrito */
+            display: none; /* Ocultar el carrito por defecto */
         }
         #ver-carrito {
             background-color: #4CAF50;
@@ -75,6 +81,9 @@
             font-size: 16px;
             margin-top: 10px;
             transition: background-color 0.3s;
+            position: absolute; /* Posicionar el botón de carrito */
+            top: 20px; /* Ajustar la posición superior */
+            right: 20px; /* Ajustar la posición derecha */
         }
         #ver-carrito:hover {
             background-color: #45a049;
@@ -127,8 +136,9 @@
 </head>
 <body>
     <header>
-        <h1>DULCE CONTIGO</h1>
+        <h1>Venta de Postres</h1>
         <button id="ver-carrito">🛒 Ver Carrito</button>
+        <div id="carrito"></div> <!-- Mover el carrito dentro del header -->
     </header>
     <nav>
         <a href="index.html">Inicio</a>
@@ -160,6 +170,36 @@
             <button id="comprar-cupcake">Comprar</button>
         </div>
     </div>
-    <div id="carrito"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('ver-carrito').addEventListener('click', function() {
+                var carrito = document.getElementById('carrito');
+                if (carrito.style.display === 'none' || carrito.style.display === '') {
+                    carrito.style.display = 'block';
+                } else {
+                    carrito.style.display = 'none';
+                }
+            });
+
+            document.getElementById('comprar-pastel').addEventListener('click', function() {
+                agregarAlCarrito('Pastel de Chocolate');
+            });
+
+            document.getElementById('comprar-tarta').addEventListener('click', function() {
+                agregarAlCarrito('Tarta de Fresas');
+            });
+
+            document.getElementById('comprar-cupcake').addEventListener('click', function() {
+                agregarAlCarrito('Cupcake de Vainilla');
+            });
+
+            function agregarAlCarrito(producto) {
+                var carrito = document.getElementById('carrito');
+                var item = document.createElement('p');
+                item.textContent = producto;
+                carrito.appendChild(item);
+            }
+        });
+    </script>
 </body>
 </html>
